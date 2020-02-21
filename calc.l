@@ -40,9 +40,3 @@ ID ([a-z]+[0-9]*)
 	}
 
 %%
-
-int main(){
-	yylex();
-	return 0;
-}
-
