@@ -12,14 +12,14 @@ ID ([a-z]+[0-9]*)
 
 
 {digit}+	{
-		sscanf(yytext, "%d", &yylval);
+		sscanf(yytext, "%d", &(yylval.int_val));
 		return TOK_NUM;
 		}
 
 {ID} { return TOK_IDENTIFIERS;}
 "=" { return(TOK_EQUAL);}
 ";"	{	return(TOK_SEMICOLON);	}
-"-" { return(TOK_NEGNUMBER)}
+"-" { return(TOK_NEGNUMBER);}
 "+"	{	return(TOK_ADD);	}
 "*"	{	return(TOK_MUL);	}
 
