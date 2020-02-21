@@ -14,7 +14,8 @@ ID ([a-z]+[0-9]*)
 "}" {printf("TOK_CLOSE_CURLY"); return (TOK_CLOSE_CURLY);}
 
 "print" {printf("TOK_PRINT"); return (TOK_PRINT);}
-
+"(" {print("TOK_OPEN_ROUND"); return (TOK_OPEN_ROUND);}
+")" {print("TOK_CLOSE_ROUND"); return (TOK_CLOSE_ROUND);}
 
 
 "println"       {       return(TOK_PRINTLN);}
