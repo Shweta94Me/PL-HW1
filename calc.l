@@ -8,7 +8,7 @@ int yyerror (char *s);
 %option yylineno
 
 digit	([0-9])
-ID ([a-z]+[0-9]*)
+ID  [a-z][a-zA-Z0-9]*
 
 %%
 
@@ -22,23 +22,27 @@ ID ([a-z]+[0-9]*)
 ")" {printf("TOK_CLOSE_ROUND\n"); return (TOK_CLOSE_ROUND);}
 
 
-
 {digit}+	{ 
 		yylval.int_val = atoi(yytext);
 		printf("TOK_NUM\n");
 		return (TOK_NUM);
 		}
 
-{ID} {	
+{ID} {
 		yylval.str_val = yytext[0];
 		printf("TOK_IDENTIFIERS\n");
 		return (TOK_IDENTIFIERS);}
+
 "=" {printf("TOK_EQUAL\n"); return(TOK_EQUAL);}
 ";"	{printf("TOK_SEMICOLON\n"); return(TOK_SEMICOLON);	}
-"-" {printf("TOK_NEGNUMBER\n"); return(TOK_NEGNUMBER);}
 "+"	{printf("TOK_ADD\n"); return(TOK_ADD);	}
 "*"	{printf("TOK_MUL\n"); return(TOK_MUL);	}
+"-" {printf("TOK_NEGNUMBER\n"); return(TOK_NEGNUMBER);}
 [ \t\n] {}
-.	{printf("Invalid character : %c, ignored\n", yytext[0]);}
+
+[0-9][a-zA-Z0-9]* {printf("Lexical error :%s\n", yytext);}
+[A-Z][a-zA-Z0-9]* {printf("Lexical error :%s\n", yytext);}
+
+.	{printf("Lexical error :%s\n", yytext);}
 
 %%

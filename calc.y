@@ -46,9 +46,10 @@ expr_stmt:
 		// updateSymbolVal($1,$3);
 		update_link($1,$3);
 	}
-	| TOK_PRINT expr TOK_SEMICOLON
+	| TOK_PRINT expr
 		{
-			fprintf(stdout, "the value is %d\n", $2);
+			// fprintf(stdout, "the value is %d\n", $2);
+			printf("The value is %d\n", $2);
 		}
 ;
 
@@ -207,7 +208,7 @@ void printList() {
 
 int yyerror(char *s)
 {
-	printf("\n Line no %d:%s\n", yylineno,s);
+	printf("\n Parsing error: line %d\n", yylineno);
 	exit(0);
 	return 0;
 }
