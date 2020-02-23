@@ -8,3 +8,6 @@ compile_bison:
 
 link_flex_bison:
 	gcc -o calc calc.tab.c lex.yy.c -lfl
+
+clean: 
+	rm -rf lex.yy.c calc.tab.c calc.tab.h calc calc.output calc.dSYM
