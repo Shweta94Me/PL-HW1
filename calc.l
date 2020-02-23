@@ -1,43 +1,42 @@
 %{
 #include <stdio.h>
 #include "calc.tab.h"
+int yylex();
+int yyerror (char *s);
 %}
+
+%option yylineno
 
 digit	([0-9])
 ID ([a-z]+[0-9]*)
 
 %%
 
-"main()" { printf("TOK_MAINFN"); return(TOK_MAINFN);}
-"{" { printf("TOK_OPEN_CURLY");return (TOK_OPEN_CURLY);}
+"main()" { printf("TOK_MAINFN\n");return(TOK_MAINFN);}
+"{" {printf("TOK_OPEN_CURLY\n");return (TOK_OPEN_CURLY);}
 
-"}" {printf("TOK_CLOSE_CURLY"); return (TOK_CLOSE_CURLY);}
+"}" {printf("TOK_CLOSE_CURLY\n"); return (TOK_CLOSE_CURLY);}
 
-"print" {printf("TOK_PRINT"); return (TOK_PRINT);}
-"(" {print("TOK_OPEN_ROUND"); return (TOK_OPEN_ROUND);}
-")" {print("TOK_CLOSE_ROUND"); return (TOK_CLOSE_ROUND);}
-
-
-"println"       {       return(TOK_PRINTLN);}
+"print" {printf("TOK_PRINT\n");return (TOK_PRINT);}
+"(" {printf("TOK_OPEN_ROUND\n");return (TOK_OPEN_ROUND);}
+")" {printf("TOK_CLOSE_ROUND\n"); return (TOK_CLOSE_ROUND);}
 
 
-{digit}+	{
-		sscanf(yytext, "%d", &(yylval.int_val));
-		printf("TOK_NUM");
+
+{digit}+	{ yylval.int_val = atoi(yytext);
+		printf("TOK_NUM\n");
 		return (TOK_NUM);
 		}
 
-{ID} { printf("TOK_IDENTIFIERS"); return (TOK_IDENTIFIERS);}
-"=" { printf("TOK_EQUAL"); return(TOK_EQUAL);}
-";"	{ printf("TOK_SEMICOLON");	return(TOK_SEMICOLON);	}
-"-" { printf("TOK_NEGNUMBER"); return(TOK_NEGNUMBER);}
-"+"	{ printf("TOK_ADD");	return(TOK_ADD);	}
-"*"	{ printf("TOK_MUL");	return(TOK_MUL);	}
-[\t] {}
-[ \n] 	{}
-
-.	{printf("Invalid character '%c', ignored\n", 
-			yytext[0]);
-	}
+{ID} {	yylval.str_val = yytext[0];
+		printf("TOK_IDENTIFIERS\n");
+		return (TOK_IDENTIFIERS);}
+"=" {printf("TOK_EQUAL\n"); return(TOK_EQUAL);}
+";"	{printf("TOK_SEMICOLON\n"); return(TOK_SEMICOLON);	}
+"-" {printf("TOK_NEGNUMBER\n"); return(TOK_NEGNUMBER);}
+"+"	{printf("TOK_ADD\n"); return(TOK_ADD);	}
+"*"	{printf("TOK_MUL\n"); return(TOK_MUL);	}
+[ \t\n] {}
+.	{printf("Invalid character : %c, ignored\n", yytext[0]);}
 
 %%
