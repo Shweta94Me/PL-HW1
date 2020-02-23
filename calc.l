@@ -12,37 +12,25 @@ ID  [a-z][a-zA-Z0-9]*
 
 %%
 
-"main()" { printf("TOK_MAINFN\n");return(TOK_MAINFN);}
-"{" {printf("TOK_OPEN_CURLY\n");return (TOK_OPEN_CURLY);}
+"main()"                        { return(TOK_MAINFN);}
+"{"                             {return (TOK_OPEN_CURLY);}
+"}"                             { return (TOK_CLOSE_CURLY);}
+"print"                         {return (TOK_PRINT);}
+"("                             {return (TOK_OPEN_ROUND);}
+")"                             {return (TOK_CLOSE_ROUND);}
 
-"}" {printf("TOK_CLOSE_CURLY\n"); return (TOK_CLOSE_CURLY);}
+{digit}+	                    {yylval.int_val = atoi(yytext);      return (TOK_NUM);}
+{ID}                            {yylval.str_val = yytext[0];  return (TOK_IDENTIFIERS);}
 
-"print" {printf("TOK_PRINT\n");return (TOK_PRINT);}
-"(" {printf("TOK_OPEN_ROUND\n");return (TOK_OPEN_ROUND);}
-")" {printf("TOK_CLOSE_ROUND\n"); return (TOK_CLOSE_ROUND);}
+"="                             {return(TOK_EQUAL);}
+";"	                            {return(TOK_SEMICOLON);	}
+"+"	                            {return(TOK_ADD);	}
+"*"	                            {return(TOK_MUL);	}
+"-"                             {return(TOK_NEGNUMBER);}
+[ \t\n]                         {}
 
-
-{digit}+	{ 
-		yylval.int_val = atoi(yytext);
-		printf("TOK_NUM\n");
-		return (TOK_NUM);
-		}
-
-{ID} {
-		yylval.str_val = yytext[0];
-		printf("TOK_IDENTIFIERS\n");
-		return (TOK_IDENTIFIERS);}
-
-"=" {printf("TOK_EQUAL\n"); return(TOK_EQUAL);}
-";"	{printf("TOK_SEMICOLON\n"); return(TOK_SEMICOLON);	}
-"+"	{printf("TOK_ADD\n"); return(TOK_ADD);	}
-"*"	{printf("TOK_MUL\n"); return(TOK_MUL);	}
-"-" {printf("TOK_NEGNUMBER\n"); return(TOK_NEGNUMBER);}
-[ \t\n] {}
-
-[0-9][a-zA-Z0-9]* {printf("Lexical error :%s\n", yytext);}
-[A-Z][a-zA-Z0-9]* {printf("Lexical error :%s\n", yytext);}
-
-.	{printf("Lexical error :%s\n", yytext);}
+[0-9][a-zA-Z0-9]*               {printf("Lexical error :%s\n", yytext);}
+[A-Z][a-zA-Z0-9]*               {printf("Lexical error :%s\n", yytext);}
+.	                            {printf("Lexical error :%s\n", yytext);}
 
 %%
