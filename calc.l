@@ -23,12 +23,14 @@ ID ([a-z]+[0-9]*)
 
 
 
-{digit}+	{ yylval.int_val = atoi(yytext);
+{digit}+	{ 
+		yylval.int_val = atoi(yytext);
 		printf("TOK_NUM\n");
 		return (TOK_NUM);
 		}
 
-{ID} {	yylval.str_val = yytext[0];
+{ID} {	
+		yylval.str_val = yytext[0];
 		printf("TOK_IDENTIFIERS\n");
 		return (TOK_IDENTIFIERS);}
 "=" {printf("TOK_EQUAL\n"); return(TOK_EQUAL);}
