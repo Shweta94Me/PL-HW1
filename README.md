@@ -25,6 +25,10 @@ Project in group
 		 then "main() { x =3; print x; }
 	* Use make clean
 
-4.) 
+4.) Algorithm
+	* Implemented Linked List data structure to create symbol table.
+	* Used insertFirst , find and update_link methods to insert a new entry, 	  	  search existing indentifier and Update existing identifier.
+	* Initially indentifier and its value is passed to update_link function if the 	  linked list is not created then a new entry of this indentifier and value is 	  added to the list. If linked list is created search for that identifier. If 	  	  identifier is found then update its value else insert a new key value to the 	  list.
+
 
 	 
