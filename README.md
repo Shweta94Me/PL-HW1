@@ -13,7 +13,7 @@ Project in group
 
 3.) How to execute the program
 
-	* Untar pl-skolhap1smestry1.tar file in folder.
+	* Untar pl-skolhap1smestry1.tar file in folder using command  "tar -xvf pl-skolhap1smeatry1.tar".
 	* cd into that folder where calc.l ,calc.y and Makefile is avialable. 
 	* type command "make".
 	* After running "make" command "calc" named executable will be generated.
