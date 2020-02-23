@@ -18,7 +18,7 @@ extern int yylineno;
 
 %union{
       int int_val;
-		char str_val;
+	  char str_val;
 }
 
 %start prog
@@ -58,8 +58,7 @@ expr_stmt:
 	| 
    TOK_PRINT expr
 	{
-		// fprintf(stdout, "the value is %d\n", $2);
-		printf("The value is %d\n", $2);
+		printf("%d\n", $2);
 	}
 ;
 
@@ -153,7 +152,7 @@ void update_link(char key1,int val){
 int yyerror(char *s)
 {
 	printf("\n Parsing error: line %d\n", yylineno);
-	exit(0);
+
 	return 0;
 }
 
