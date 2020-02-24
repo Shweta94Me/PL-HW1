@@ -12,14 +12,14 @@ ID  [a-z][a-zA-Z0-9]*
 
 %%
 
-"main()"                        { return(TOK_MAINFN);}
+"main()"                        {return(TOK_MAINFN);}
 "{"                             {return (TOK_OPEN_CURLY);}
-"}"                             { return (TOK_CLOSE_CURLY);}
+"}"                             {return (TOK_CLOSE_CURLY);}
 "print"                         {return (TOK_PRINT);}
 "("                             {return (TOK_OPEN_ROUND);}
 ")"                             {return (TOK_CLOSE_ROUND);}
 
-{digit}+	                    {yylval.int_val = atoi(yytext);      return (TOK_NUM);}
+{digit}+	                    {yylval.int_val = atoi(yytext); return (TOK_NUM);}
 {ID}                            {yylval.str_val = yytext[0];  return (TOK_IDENTIFIERS);}
 
 "="                             {return(TOK_EQUAL);}
@@ -28,7 +28,8 @@ ID  [a-z][a-zA-Z0-9]*
 "*"	                            {return(TOK_MUL);	}
 "-"                             {return(TOK_NEGNUMBER);}
 [ \t\n]                         {}
-[^a-z][a-zA-Z0-9]*              {printf("Lexical Error: %c\n", yytext[0]);}
-.	                            {printf("Lexical Error: %c\n", yytext[0]);}
+[0-9][a-zA-Z0-9]*				{printf("Lexical Error: %s\n", yytext);}
+[A-Z][a-zA-Z0-9]*               {printf("Lexical Error: %s\n", yytext);}
+.	                            {printf("Lexical error :%s\n", yytext);}
 
 %%
