@@ -28,7 +28,7 @@ ID  [a-z][a-zA-Z0-9]*
 "*"	                            {return(TOK_MUL);	}
 "-"                             {return(TOK_NEGNUMBER);}
 [ \t\n]                         {}
-
+[^a-z][a-zA-Z0-9]*              {printf("Lexical Error: %c\n", yytext[0]);}
 .	                            {printf("Lexical Error: %c\n", yytext[0]);}
 
 %%
